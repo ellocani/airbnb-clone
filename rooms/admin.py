@@ -4,16 +4,16 @@ from .models import Room, Amenity
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
-    
+
     list_display = (
         "name",
         "price",
         "kind",
+        "total_amenities",
         "owner",
         "created_at",
-        "updated_at",
     )
-    
+
     list_filter = (
         "country",
         "city",
@@ -24,6 +24,9 @@ class RoomAdmin(admin.ModelAdmin):
         "kind",
         "amenities",
     )
+
+    def total_amenities(self, room):
+        return room.amenities.count()
 
 
 @admin.register(Amenity)
