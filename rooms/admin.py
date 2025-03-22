@@ -25,7 +25,15 @@ class RoomAdmin(admin.ModelAdmin):
         "kind",
         "amenities",
     )
+        # 관리자 패널에서 검색
+    search_fields = (
+        "name",
+        "price",
+        # 외래키 이용한 검색도 가능
+        "owner__username",
+    )
 
+    # 관리자 패널에 함수 추가 가능
     def total_amenities(self, room):
         return room.amenities.count()
 
